@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,30 +9,50 @@ namespace SB.CreateMessage
 {
     class Program
     {
-        const string ServiceBusConnectionString = "Endpoint=sb://filetrust-minikubedeployment-testqueue.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gUXrcTgU1WGVJECThgSTg3WveAwMGRFWHXrlpKnAR5E=";
-        const string QueueName = "test-queue-1";
+        const string ServiceBusConnectionString = "Endpoint=sb://filetrust-minikubedeployment.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gZFOfH0CD+lAd6pp7DNTjFIcyLDXOD/K1cvspsck+BM=";
+        const int noQueues = 11;
         static IQueueClient queueClient;
 
         static void Main(string[] args)
         {
-            MainAsync().GetAwaiter().GetResult();
+                MainAsync().GetAwaiter().GetResult();
         }
 
         static async Task MainAsync()
         {
             const int numberOfMessages = 10;
-            queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+            string QueueName;
+            List<string> queuenames = new List<string>();
+            queuenames.Add("MessageInspectionQueue");
+            queuenames.Add("FileRouterQueue");
+            queuenames.Add("Pre-AnalysisQueue");
+            queuenames.Add("Post-AnalysisQueue");
+            queuenames.Add("Pre-ProtectQueue");
+            queuenames.Add("Post-ProtectQueue");
+            queuenames.Add("ThreatCensorQueue");
+            queuenames.Add("HeldFileRouterQueue");
+            queuenames.Add("FilePreviewQueue");
+            queuenames.Add("HeldReportQueue");
+            queuenames.Add("MessageRegenerationQueue");
+            queuenames.Add("SMTPTransmissionQueue");
 
             Console.WriteLine("======================================================");
             Console.WriteLine("Press ENTER key to exit after sending all the messages.");
             Console.WriteLine("======================================================");
 
-            // Send messages.
-            await SendMessagesAsync(numberOfMessages);
+            foreach (string queuename in queuenames)
+            {
+                QueueName = queuename;
 
-            Console.ReadKey();
+                queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
 
-            await queueClient.CloseAsync();
+                // Send messages.
+                await SendMessagesAsync(numberOfMessages);
+
+                Console.ReadKey();
+
+                await queueClient.CloseAsync();
+            }            
         }
 
         static async Task SendMessagesAsync(int numberOfMessagesToSend)
