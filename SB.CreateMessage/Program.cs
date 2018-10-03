@@ -49,10 +49,9 @@ namespace SB.CreateMessage
                 // Send messages.
                 await SendMessagesAsync(numberOfMessages);
 
-                Console.ReadKey();
-
                 await queueClient.CloseAsync();
-            }            
+            }
+            Console.ReadKey();
         }
 
         static async Task SendMessagesAsync(int numberOfMessagesToSend)

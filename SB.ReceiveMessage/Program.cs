@@ -36,10 +36,10 @@ namespace SB.ReceiveMessage
             queuenames.Add("SMTPTransmissionQueue");
 
             Console.WriteLine("======================================================");
-            Console.WriteLine("Press ENTER key to exit after sending all the messages.");
+            Console.WriteLine("Press ENTER key to exit after receiving all the messages.");
             Console.WriteLine("======================================================");
 
-            foreach (string queuename in queuenames)
+            foreach(string queuename in queuenames)
             {
                 QueueName = queuename;
 
@@ -52,7 +52,7 @@ namespace SB.ReceiveMessage
 
                 await queueClient.CloseAsync();
             }
-   
+               
         }
 
         static void RegisterOnMessageHandlerAndReceiveMessages()
