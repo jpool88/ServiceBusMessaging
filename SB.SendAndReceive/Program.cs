@@ -9,7 +9,7 @@ namespace SB.SendAndReceive
 {
     class Program
     {
-        const string ServiceBusConnectionString = "Endpoint=sb://filetrust-minikubedeployment.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gZFOfH0CD+lAd6pp7DNTjFIcyLDXOD/K1cvspsck+BM=";
+        const string ServiceBusConnectionString = "Your Connection String Here";
         const int noQueues = 11;
         static IQueueClient queueClient;
 
@@ -24,21 +24,19 @@ namespace SB.SendAndReceive
             
             string QueueName;
             List<string> queuenames = new List<string>();
-            queuenames.Add("MessageInspectionQueue");
-            queuenames.Add("FileRouterQueue");
-            queuenames.Add("Pre-AnalysisQueue");
-            queuenames.Add("Post-AnalysisQueue");
-            queuenames.Add("Pre-ProtectQueue");
-            queuenames.Add("Post-ProtectQueue");
-            queuenames.Add("ThreatCensorQueue");
-            queuenames.Add("HeldFileRouterQueue");
-            queuenames.Add("FilePreviewQueue");
-            queuenames.Add("HeldReportQueue");
-            queuenames.Add("MessageRegenerationQueue");
-            queuenames.Add("SMTPTransmissionQueue");
+            queuenames.Add("Your Queue Names Here");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
+            //queuenames.Add("");
 
-            Console.WriteLine("======================================================");
-            Console.WriteLine("Press ENTER key to exit after sending all the messages.");
             Console.WriteLine("======================================================");
 
             foreach (string queuename in queuenames)
@@ -53,6 +51,8 @@ namespace SB.SendAndReceive
 
                 await queueClient.CloseAsync();
             }
+            Console.WriteLine("Press ENTER key to exit after sending all the messages.");
+            Console.WriteLine("======================================================");
             Console.ReadKey();
         }
 
@@ -98,7 +98,7 @@ namespace SB.SendAndReceive
             queuenames.Add("SMTPTransmissionQueue");
 
             Console.WriteLine("======================================================");
-            Console.WriteLine("Press ENTER key to exit after receiving all the messages.");
+            Console.WriteLine("Press ENTER key to Continue after receiving all the messages.");
             Console.WriteLine("======================================================");
 
             foreach (string queuename in queuenames)
